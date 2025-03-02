@@ -135,6 +135,7 @@ class MultiHeadAttention(torch.nn.Module):
         self.W_value = torch.nn.Linear(dim_in, dim_out, bias=qkv_bias)
         self.out_proj = torch.nn.Linear(dim_out, dim_out)  # A linear layer than combines the outputs of all heads.
         self.dropout = torch.nn.Dropout(dropout)
+        self.scale = scale
         self.register_buffer(
             "mask", torch.triu(torch.ones(context_length, context_length), diagonal=1)
         )
